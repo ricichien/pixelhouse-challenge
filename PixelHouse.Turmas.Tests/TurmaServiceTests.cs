@@ -6,9 +6,6 @@ using Xunit;
 
 namespace PixelHouse.Turmas.Tests;
 
-// Fakes simples (sem precisar de biblioteca de mock) — implementam as
-// mesmas interfaces que o InMemoryTurmaRepository/InMemoryPedidoRepository,
-// só que com dados fixos, controlados pelo teste.
 public class TurmaRepositoryFake : ITurmaRepository
 {
     public Turma? Turma { get; set; }
@@ -35,9 +32,7 @@ public class PedidoRepositoryFake : IPedidoRepository
 
 public class TurmaServiceTests
 {
-    // -------------------------------------------------------------
-    // EXEMPLO PRONTO — estude este antes de tentar os TODOs abaixo.
-    // -------------------------------------------------------------
+
     [Fact]
     public async Task ObterDetalheAsync_DeveSomarApenasPedidosAprovados()
     {
@@ -68,13 +63,6 @@ public class TurmaServiceTests
         Assert.Equal(150m, resultado.ReceitaTotal);
     }
 
-    // -------------------------------------------------------------
-    // TODO 1 — complete você mesmo.
-    // Objetivo: garantir que, quando a turma NÃO existe no repositório,
-    // o serviço retorna null (e não lança exceção).
-    // Dica: não precisa de PedidoRepositoryFake com dados nenhum,
-    // só não cadastre nenhuma Turma no TurmaRepositoryFake.
-    // -------------------------------------------------------------
     [Fact]
     public async Task ObterDetalheAsync_DeveRetornarNull_QuandoTurmaNaoExiste()
     {
@@ -88,14 +76,6 @@ public class TurmaServiceTests
         Assert.Null(resultado);
     }
 
-    // -------------------------------------------------------------
-    // TODO 2 — complete você mesmo.
-    // Objetivo: testar ObterPedidosAprovadosAsync — deve devolver só os
-    // pedidos com Status = "APROVADO" da turma pedida, como PedidoDto.
-    // Dica: reaproveite o padrão do exemplo pronto acima, mas chame
-    // service.ObterPedidosAprovadosAsync(idTurma) em vez de ObterDetalheAsync.
-    // -------------------------------------------------------------
-    [Fact]
     public async Task ObterPedidosAprovadosAsync_DeveFiltrarSomenteAprovados()
     {
         var turmaRepo = new TurmaRepositoryFake
